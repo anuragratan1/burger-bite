@@ -1,0 +1,23 @@
+.spotlight {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(230, 57, 70, 0.03) 30%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 1; /* Keep it below text/cards but above background */
+  mix-blend-mode: screen;
+}
+
+@media (max-width: 1024px) {
+  .spotlight {
+    display: none;
+  }
+}

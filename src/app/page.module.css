@@ -1,0 +1,658 @@
+.section {
+  padding: 8rem 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.signatureMenu {
+  background-color: var(--background);
+}
+
+/* Replaced with promiseSection */
+
+.sectionTitle {
+  font-size: clamp(3rem, 8vw, 6rem);
+  text-transform: uppercase;
+  margin-bottom: 4rem;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+/* Replaced with promiseSection */
+
+.menuGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.menuCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+.menuCard:hover {
+  transform: translateY(-10px) scale(1.02);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--brand-yellow);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.cardTitle {
+  font-size: 2.5rem;
+  color: var(--brand-yellow);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.cardDesc {
+  color: #a3a3a3;
+  line-height: 1.6;
+}
+
+.promiseSection {
+  background-color: #050505;
+  padding: 12rem 4rem;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.promiseContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  position: relative;
+  z-index: 2;
+}
+
+.promiseHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.promiseNumber {
+  font-family: var(--font-inter), sans-serif;
+  color: var(--brand-red);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.promiseTitle {
+  font-family: var(--font-bebas), sans-serif;
+  color: white;
+  font-size: clamp(3rem, 5vw, 5rem);
+  line-height: 1;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.promiseBody {
+  display: flex;
+  align-items: center;
+}
+
+.promiseStatement {
+  font-family: var(--font-inter), sans-serif;
+  color: #666;
+  font-size: clamp(1.5rem, 3.5vw, 3rem);
+  line-height: 1.3;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.highlight {
+  color: white;
+  font-weight: 500;
+}
+
+.promiseWatermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-bebas), sans-serif;
+  font-size: 35vw;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.03);
+  pointer-events: none;
+  z-index: 1;
+  line-height: 0.8;
+  white-space: nowrap;
+}
+
+/* New Premium Sections */
+
+.artOfBurger {
+  background-color: #050505;
+}
+
+.bentoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 300px);
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.bentoItem {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.bentoItem:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-5px);
+  filter: brightness(1.15);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.bentoLarge {
+  grid-column: span 2;
+  grid-row: span 2;
+  background: radial-gradient(circle at top right, rgba(230, 57, 70, 0.15), transparent 60%), rgba(255, 255, 255, 0.02);
+}
+
+.bentoTitle {
+  font-family: var(--font-bebas), sans-serif;
+  font-size: 3rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.bentoLarge .bentoTitle {
+  font-size: 5rem;
+  color: var(--brand-yellow);
+}
+
+.bentoDesc {
+  color: #a3a3a3;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Gold CTA Section */
+.goldStandardSection {
+  background-color: var(--brand-yellow);
+  padding: 12rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.goldContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 1000px;
+  position: relative;
+  z-index: 2;
+}
+
+.goldTitle {
+  font-family: var(--font-bebas), sans-serif;
+  color: #050505;
+  font-size: clamp(4rem, 8vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.goldDivider {
+  width: 100px;
+  height: 4px;
+  background-color: #050505;
+  margin: 3rem 0;
+}
+
+.goldSubtitle {
+  font-family: var(--font-inter), sans-serif;
+  color: #050505;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  line-height: 1.4;
+  font-weight: 500;
+  max-width: 600px;
+}
+
+.goldButton {
+  background-color: #050505;
+  color: var(--brand-yellow);
+  border: none;
+  border-radius: 50px;
+  padding: 1.5rem 4rem;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.goldButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.goldWatermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-bebas), sans-serif;
+  font-size: 50vw;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(0,0,0,0.05);
+  pointer-events: none;
+  z-index: 1;
+  line-height: 0.8;
+  white-space: nowrap;
+}
+
+.location {
+  background-color: var(--background);
+  text-align: center;
+  padding: 12rem 2rem;
+}
+
+.locationTitle {
+  font-family: var(--font-bebas), sans-serif;
+  font-size: clamp(4rem, 15vw, 12rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.1);
+  margin-bottom: 2rem;
+  transition: color 0.5s ease;
+  padding-bottom: 0.1em;
+}
+
+.locationTitle:hover {
+  color: white;
+  -webkit-text-stroke: 0;
+}
+
+.locationAddress {
+  font-size: 1.25rem;
+  letter-spacing: 0.2em;
+  color: var(--brand-yellow);
+  text-transform: uppercase;
+}
+
+.footer {
+  background-color: #000;
+  padding: 4rem 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.footerLogo {
+  font-family: var(--font-bebas), sans-serif;
+  font-size: 3rem;
+  color: white;
+  letter-spacing: 0.1em;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 2rem;
+}
+
+.footerLinks a {
+  color: #888;
+  text-decoration: none;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: color 0.3s ease;
+}
+
+.footerLinks a:hover {
+  color: var(--brand-yellow);
+}
+
+.copyright {
+  color: #444;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+/* 1. Marquee Section */
+.marqueeContainer {
+  background-color: var(--brand-yellow);
+  padding: 2rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  transform: rotateZ(-2deg) scale(1.05);
+  transform-origin: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  position: relative;
+  z-index: 10;
+}
+
+.marqueeText {
+  font-family: var(--font-bebas), sans-serif;
+  font-size: 3rem;
+  color: #050505;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: inline-block;
+  padding-left: 100%; /* Start off-screen */
+  animation: marquee 20s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* 2. Heritage Section */
+.heritage {
+  background-color: var(--background);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  padding: 8rem 4rem;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.heritageImage {
+  width: 100%;
+  height: 600px;
+  background: radial-gradient(circle at center, rgba(230, 57, 70, 0.2), transparent), #111;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.heritageImage::after {
+  content: 'EST. 2026';
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  font-family: var(--font-bebas), sans-serif;
+  font-size: 8rem;
+  color: rgba(255,255,255,0.05);
+  line-height: 0.8;
+}
+
+.heritageContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.heritageSubtitle {
+  color: var(--brand-red);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+}
+
+.heritageTitle {
+  font-family: var(--font-bebas), sans-serif;
+  font-size: clamp(3rem, 6vw, 5rem);
+  line-height: 1;
+  color: white;
+}
+
+.heritageText {
+  color: #a3a3a3;
+  line-height: 1.8;
+  font-size: 1.1rem;
+  max-width: 500px;
+}
+
+/* 3. Horizontal Scroll Menu */
+.horizontalMenu {
+  background-color: #050505;
+  padding: 8rem 0;
+  overflow: hidden;
+}
+
+.horizontalMenuHeader {
+  margin-bottom: 4rem;
+  padding: 0 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.horizontalScrollWrapper {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  padding: 0 4rem 2rem 4rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+}
+
+.horizontalScrollWrapper::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.menuItemCard {
+  flex: 0 0 400px;
+  height: 500px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 3rem;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.menuItemCard:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: var(--brand-yellow);
+  filter: brightness(1.15);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.menuItemPrice {
+  font-family: var(--font-bebas), sans-serif;
+  font-size: 2rem;
+  color: var(--brand-red);
+  margin-bottom: 1rem;
+}
+
+.menuItemTitle {
+  font-family: var(--font-bebas), sans-serif;
+  font-size: 3rem;
+  color: white;
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+
+/* 4. Burger Bite Club (App/Loyalty) */
+.clubSection {
+  background-color: var(--brand-red);
+  padding: 8rem 2rem;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.clubSection::before {
+  content: 'BURGER BITE';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-bebas), sans-serif;
+  font-size: 40vw;
+  color: rgba(0,0,0,0.1);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.clubContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.clubTitle {
+  font-family: var(--font-bebas), sans-serif;
+  font-size: clamp(4rem, 8vw, 8rem);
+  line-height: 1;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.clubDesc {
+  font-size: 1.25rem;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.downloadButton {
+  background-color: #000;
+  color: white;
+  padding: 1rem 3rem;
+  border-radius: 50px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.downloadButton:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+  .heritage {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 6rem 2rem;
+  }
+  
+  .bentoGrid {
+    grid-template-columns: 1fr 1fr;
+    padding: 0 2rem;
+  }
+  
+  .bentoLarge {
+    grid-column: span 2;
+  }
+
+  .menuGrid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 2rem;
+  }
+
+  .promiseContainer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .promiseHeader {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .promiseWatermark {
+    font-size: 45vw;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .bentoGrid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  
+  .bentoLarge {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+  
+  .bentoItem {
+    padding: 1.5rem;
+  }
+  
+  .bentoLarge .bentoTitle {
+    font-size: 3rem;
+  }
+
+  .menuGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .goldStandardSection {
+    padding: 6rem 1rem;
+  }
+
+  .goldTitle {
+    font-size: clamp(3rem, 12vw, 4rem);
+  }
+
+  .horizontalMenuHeader {
+    padding: 0 1rem;
+  }
+
+  .horizontalScrollWrapper {
+    padding: 0 1rem 2rem 1rem;
+  }
+
+  .menuItemCard {
+    flex: 0 0 85vw;
+  }
+}
