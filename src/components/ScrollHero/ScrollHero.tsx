@@ -35,7 +35,7 @@ const BURGER_LABELS = [
 export default function ScrollHero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [images, setImages] = useState<HTMLImageElement[]>([]);
+  const imagesRef = useRef<HTMLImageElement[]>([]);
   const [loadedFrames, setLoadedFrames] = useState(0);
   
   const scrollProgress = useMotionValue(0);
@@ -46,26 +46,79 @@ export default function ScrollHero() {
   const borderRadius = useTransform(scrollProgress, [0.85, 1], ["0px", "100px"]);
   const y = useTransform(scrollProgress, [0.95, 1], ["0%", "10%"]);
 
-  // Preload images
+  // Preload images using a concurrency pool to prevent network stalling on Vercel
   useEffect(() => {
-    const loadedImages: HTMLImageElement[] = [];
-    let loadedCount = 0;
+    let isCancelled = false;
+    
+    // Concurrency queue
+    const concurrencyLimit = 5;
+    let activeCount = 0;
+    const queue: (() => void)[] = [];
+    
+    const processQueue = () => {
+      if (activeCount >= concurrencyLimit || queue.length === 0) return;
+      activeCount++;
+      const task = queue.shift();
+      if (task) task();
+    };
 
-    for (let i = 1; i <= TOTAL_FRAMES; i++) {
-      const img = new Image();
-      const paddedIndex = i.toString().padStart(4, "0");
-      img.src = `${FRAME_PREFIX}${paddedIndex}${FRAME_SUFFIX}`;
-      img.onload = () => {
-        loadedCount++;
-        setLoadedFrames(loadedCount);
-        // Draw first frame when it loads
-        if (i === 1) {
-          drawFrame(img);
-        }
-      };
-      loadedImages.push(img);
-    }
-    setImages(loadedImages);
+    const enqueue = (task: () => Promise<void>) => {
+      return new Promise<void>((resolve) => {
+        const execute = async () => {
+          await task();
+          activeCount--;
+          resolve();
+          if (!isCancelled) processQueue();
+        };
+        queue.push(execute);
+        if (!isCancelled) processQueue();
+      });
+    };
+
+    const loadImage = (i: number) => {
+      return new Promise<void>((resolve) => {
+        const img = new Image();
+        const paddedIndex = i.toString().padStart(4, "0");
+        img.src = `${FRAME_PREFIX}${paddedIndex}${FRAME_SUFFIX}`;
+        img.onload = () => {
+          if (isCancelled) return resolve();
+          imagesRef.current[i - 1] = img;
+          setLoadedFrames(prev => prev + 1);
+          if (i === 1) drawFrame(img);
+          resolve();
+        };
+        img.onerror = () => resolve();
+      });
+    };
+
+    const loadAll = async () => {
+      imagesRef.current = new Array(TOTAL_FRAMES);
+      
+      // 1. Load first frame immediately
+      await loadImage(1);
+      if (isCancelled) return;
+      
+      // 2. Load the next 9 frames as a small batch
+      const initialBatch = [];
+      for (let i = 2; i <= Math.min(10, TOTAL_FRAMES); i++) {
+        initialBatch.push(loadImage(i));
+      }
+      await Promise.all(initialBatch);
+      if (isCancelled) return;
+      
+      // 3. Load the remaining frames using the concurrency pool
+      const remainingPromises = [];
+      for (let i = 11; i <= TOTAL_FRAMES; i++) {
+        remainingPromises.push(enqueue(() => loadImage(i)));
+      }
+      await Promise.all(remainingPromises);
+    };
+
+    loadAll();
+
+    return () => {
+      isCancelled = true;
+    };
   }, []);
 
   const drawFrame = (img: HTMLImageElement) => {
@@ -89,7 +142,8 @@ export default function ScrollHero() {
       }
       
       animationFrameId = requestAnimationFrame(() => {
-        if (!containerRef.current || images.length === 0) return;
+        const currentImages = imagesRef.current;
+        if (!containerRef.current || !currentImages || currentImages.length === 0) return;
         
         const container = containerRef.current;
         const { top, height } = container.getBoundingClientRect();
@@ -104,8 +158,8 @@ export default function ScrollHero() {
         
         const frameIndex = Math.floor(progress * (TOTAL_FRAMES - 1));
         
-        if (images[frameIndex] && images[frameIndex].complete) {
-          drawFrame(images[frameIndex]);
+        if (currentImages[frameIndex] && currentImages[frameIndex].complete) {
+          drawFrame(currentImages[frameIndex]);
         }
       });
     };
@@ -117,7 +171,7 @@ export default function ScrollHero() {
       window.removeEventListener("scroll", handleScroll);
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
     };
-  }, [images, scrollProgress]);
+  }, [scrollProgress]);
 
   const getLabelOpacity = (progress: number, start: number, end: number) => {
     const fadeDuration = 0.05;
