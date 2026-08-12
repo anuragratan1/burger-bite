@@ -41,10 +41,19 @@ export default function ScrollHero() {
   const scrollProgress = useMotionValue(0);
   const [reactProgress, setReactProgress] = useState(0);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   // Portal Morph Transforms (Active only at the very end of the scroll)
-  const scale = useTransform(scrollProgress, [0.85, 1], [1, 0.6]);
-  const borderRadius = useTransform(scrollProgress, [0.85, 1], ["0px", "100px"]);
-  const y = useTransform(scrollProgress, [0.95, 1], ["0%", "10%"]);
+  const scale = useTransform(scrollProgress, [0.85, 1], [1, isMobile ? 0.95 : 0.6]);
+  const borderRadius = useTransform(scrollProgress, [0.85, 1], ["0px", isMobile ? "20px" : "100px"]);
+  const y = useTransform(scrollProgress, [0.95, 1], ["0%", isMobile ? "2%" : "10%"]);
 
   // Preload images using a concurrency pool to prevent network stalling on Vercel
   useEffect(() => {

@@ -108,7 +108,12 @@
 
 @media (max-width: 1024px) {
   .dynamicLabel {
-    display: none;
+    top: auto !important;
+    bottom: 15% !important;
+    left: 5% !important;
+    right: 5% !important;
+    width: 90%;
+    text-align: center !important;
   }
   .labelTitle {
     font-size: 2.5rem;
@@ -121,6 +126,12 @@
   }
   .scrollIndicator {
     font-size: 0.8rem;
+  }
+  .dynamicLabel {
+    bottom: 20% !important;
+  }
+  .labelTitle {
+    font-size: 2rem;
   }
 }
 
